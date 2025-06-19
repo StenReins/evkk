@@ -24,7 +24,7 @@ export default function Exercise() {
   const [exercises, setExercises] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedLanguages, setSelectedLanguages] = useState([]);
-  const [selectedTypes, setSelectedTypes] = useState([]);
+  const [search, setSearch] = useState('');
   const itemsPerPage = 5;
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -34,6 +34,9 @@ export default function Exercise() {
   }
   const handleLanguagesChange = (selected) => {
     setSelectedLanguages(selected);
+  }
+  const handleSearchChange = (event) => {
+    setSearch(event);
   }
 
 
@@ -48,6 +51,9 @@ export default function Exercise() {
 
   const fetchData = () => {
     const params = new URLSearchParams();
+    if(search && search.trim().length > 0) {
+      params.append('search', search.trim());
+    }
     if(selectedCategories.length) {
       params.append('categories', selectedCategories.join(','));
     }
@@ -68,7 +74,7 @@ export default function Exercise() {
 
   useEffect(() => {
     fetchData();
-  }, [selectedCategories, selectedLanguages, selectedTypes]);
+  }, [selectedCategories, selectedLanguages, search]);
 
   return (
     <div>
@@ -92,7 +98,7 @@ export default function Exercise() {
             </div>
                                                
             <div className="library-infoContainer">
-              <SearchBar />
+              <SearchBar  value={search} onSearch={handleSearchChange}/>
               <div className="library-buttons">
                 <Can requireAuth={true}>
                   <Button

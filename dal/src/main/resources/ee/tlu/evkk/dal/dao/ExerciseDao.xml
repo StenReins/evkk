@@ -64,7 +64,7 @@
     ORDER BY ex.id DESC
   </select>
 
-  <select id="getFilteredExercises" resultMap="ExerciseResultMap">
+  <select id="getExercises" resultMap="ExerciseResultMap">
     SELECT
     <include refid="exerciseAssociationColumns"/>
     FROM core.exercise ex
@@ -87,6 +87,12 @@
         <foreach collection="languageLevel" item="llName" open="(" separator="," close=")">
           #{llName}
         </foreach>
+        )
+      </if>
+      <if test="search != null and search != ''">
+        AND (
+        LOWER(ex.title) LIKE CONCAT('%', LOWER(#{search}), '%')
+        OR LOWER(ex.description) LIKE CONCAT('%', LOWER(#{search}), '%')
         )
       </if>
     </where>

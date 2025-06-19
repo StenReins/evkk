@@ -13,6 +13,8 @@ import {
   Slider,
   Typography,
   Link,
+  FormGroup,
+  FormControlLabel
 } from '@mui/material';
 
 import {
@@ -277,9 +279,10 @@ export default function ExerciseModal({ isOpen, setIsOpen, onSuccess }) {
               </Box>
 
               <Box display="flex" style={{ marginTop: 40 }}>
-                {targetGroups.map((targetGroup) => (
-                  <FormGroup row>
+                <FormGroup row>
+                  {targetGroups.map((targetGroup) => (
                     <FormControlLabel
+                      key={targetGroup.id}
                       value={targetGroup.id}
                       control={
                         <Checkbox
@@ -289,10 +292,9 @@ export default function ExerciseModal({ isOpen, setIsOpen, onSuccess }) {
                       }
                       label={targetGroup.name}
                     />
-                  </FormGroup>
-                ))}
+                  ))}
+                </FormGroup>
               </Box>
-
               <Box display="flex">
                 <Grid item style={{ width: "50%" }}>
                   <Typography variant="body2" style={{ marginTop: 40 }}>{t('exercise_modal_duration')} (min)</Typography>

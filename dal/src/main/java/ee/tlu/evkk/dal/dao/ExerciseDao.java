@@ -15,7 +15,8 @@ public interface ExerciseDao {
 
   Exercise findById(@Param("id") Long id);
 
-  List<Exercise> getFilteredExercises(
+  List<Exercise> getExercises(
+    @Param("search") String search,
     @Param("categories") List<String> categories,
     @Param("languageLevel") List<String> languageLevel
   );

@@ -21,11 +21,12 @@ public class ExerciseSearchController {
   }
 
   @GetMapping("/results")
-  public List<Exercise> getFilteredExercises(
+  public List<Exercise> getExercises(
+    @RequestParam(required = false) String search,
     @RequestParam(required = false) List<String> categories,
     @RequestParam(required = false) List<String> languageLevel
   ){
-    return exerciseService.getFilteredExercises(categories, languageLevel);
+    return exerciseService.getExercises(search, categories, languageLevel);
   }
 
 

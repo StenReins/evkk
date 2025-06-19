@@ -15,7 +15,7 @@ public class ExerciseSearchService {
     this.exerciseDao = exerciseDao;
   }
 
-  public List<Exercise> getFilteredExercises(List<String> categories, List<String> languageLevel) {
-    return exerciseDao.getFilteredExercises(categories, languageLevel);
+  public List<Exercise> getExercises(String search, List<String> categories, List<String> languageLevel) {
+    return exerciseDao.getExercises(search, categories, languageLevel);
   }
 }
